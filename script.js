@@ -1,11 +1,23 @@
-// Loading screen fade-out
+// Loading screen - only show on first visit
 document.addEventListener('DOMContentLoaded', () => {
     const loadingScreen = document.getElementById('loadingScreen');
-    if (loadingScreen) {
-        // Loading screen will automatically fade out after animations complete
-        setTimeout(() => {
-            loadingScreen.style.pointerEvents = 'none';
-        }, 2300);
+    
+    // Check if this is the first page load (not a navigation)
+    if (!sessionStorage.getItem('lodgeVisited')) {
+        // First visit - show animation
+        sessionStorage.setItem('lodgeVisited', 'true');
+        
+        if (loadingScreen) {
+            // Loading screen will automatically fade out after animations complete
+            setTimeout(() => {
+                loadingScreen.style.pointerEvents = 'none';
+            }, 2300);
+        }
+    } else {
+        // Already visited - hide loading screen immediately
+        if (loadingScreen) {
+            loadingScreen.style.display = 'none';
+        }
     }
 });
 
