@@ -1,0 +1,14 @@
+title: The Lodge
+description: A beautiful website built with GitHub Pages
+baseurl: ""
+url: "https://username.github.io"
+author: Clinton Alden
+
+# Build settings
+markdown: kramdown
+theme: minima
+
+# Exclude files from Jekyll processing
+exclude:
+  - .gitignore
+  - README.md
