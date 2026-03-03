@@ -3,48 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Lodge</title>
+    <title>The Lodge - UW Environmental Collaboration</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <nav class="navbar">
-        <div class="container">
-            <h1 class="logo">The Lodge</h1>
+        <div class="container navbar-content">
+            <div class="logo">
+                <svg class="lodge-icon" viewBox="0 0 40 40" width="30" height="30">
+                    <polygon points="20,5 35,18 32,18 32,35 8,35 8,18 5,18" fill="currentColor"/>
+                    <rect x="16" y="22" width="8" height="12" fill="#2d3e1f"/>
+                </svg>
+                <h1>The Lodge</h1>
+            </div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#events">Events</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <header class="hero">
-        <div class="container">
-            <h1>Welcome to The Lodge</h1>
-            <p>Build something amazing</p>
+        <div class="hero-background"></div>
+        <div class="container hero-content">
+            <h1>The Lodge</h1>
+            <p class="tagline">Where Law, Conservation, and Environmental Stewardship Meet</p>
+            <p class="subtitle">Connecting UW Law students with graduate researchers in natural resources and environmental fields</p>
+            <a href="#events" class="cta-button">Upcoming Field Trips</a>
         </div>
     </header>
 
     <main>
-        <section id="about" class="section">
+        <section id="mission" class="section">
             <div class="container">
-                <h2>About</h2>
-                <p>This is your new GitHub Pages website. Edit this content to make it your own.</p>
+                <div class="mission-grid">
+                    <div class="mission-card">
+                        <div class="icon">🌲</div>
+                        <h3>Education</h3>
+                        <p>Learn from practitioners and stakeholders working on real environmental challenges</p>
+                    </div>
+                    <div class="mission-card">
+                        <div class="icon">🤝</div>
+                        <h3>Collaboration</h3>
+                        <p>Bridge law and natural resources disciplines for integrated problem-solving</p>
+                    </div>
+                    <div class="mission-card">
+                        <div class="icon">🏞️</div>
+                        <h3>Field Experience</h3>
+                        <p>Get hands-on experience in the field with diverse environmental stakeholders</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="contact" class="section alt">
+        <section id="events" class="section alt">
             <div class="container">
-                <h2>Get in Touch</h2>
-                <p>Contact information and links go here.</p>
+                <h2>Upcoming Field Trips</h2>
+                <div class="calendar-controls">
+                    <button class="calendar-btn" id="prevMonth">← Prev</button>
+                    <h3 id="currentMonth"></h3>
+                    <button class="calendar-btn" id="nextMonth">Next →</button>
+                </div>
+                
+                <div class="events-container">
+                    <div class="calendar-month" id="calendarMonth"></div>
+                    <div class="events-list" id="eventsList"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Get Involved</h2>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <h3>Questions?</h3>
+                        <p>Interested in joining The Lodge or learning more about our trips?</p>
+                        <p class="contact-email">Email: <a href="mailto:thelodge@uw.edu">thelodge@uw.edu</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>Follow Us</h3>
+                        <p>Stay updated on events and announcements</p>
+                        <div class="social-links">
+                            <a href="#" class="social-btn">Instagram</a>
+                            <a href="#" class="social-btn">Facebook</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 The Lodge. Hosted with GitHub Pages.</p>
+            <p>&copy; 2026 The Lodge. A collaboration of UW Law and Environmental Graduate Students.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

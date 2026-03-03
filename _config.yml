@@ -1,8 +1,8 @@
 title: The Lodge
-description: A beautiful website built with GitHub Pages
-baseurl: ""
-url: "https://username.github.io"
-author: Clinton Alden
+description: UW Law and Environmental Graduate Student Collaboration - Field trips, education, and stakeholder engagement in natural resources and environmental stewardship
+baseurl: "/thelodge"
+url: "https://clinton-alden.github.io"
+author: The Lodge Collective
 
 # Build settings
 markdown: kramdown
