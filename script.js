@@ -1,3 +1,14 @@
+// Loading screen fade-out
+document.addEventListener('DOMContentLoaded', () => {
+    const loadingScreen = document.getElementById('loadingScreen');
+    if (loadingScreen) {
+        // Loading screen will automatically fade out after animations complete
+        setTimeout(() => {
+            loadingScreen.style.pointerEvents = 'none';
+        }, 2300);
+    }
+});
+
 // Sample Events Data - Can be updated with real events
 const events = [
     {

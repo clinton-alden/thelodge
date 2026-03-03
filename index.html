@@ -7,6 +7,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Loading Screen with Animated Cabin Icon -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-container">
+            <svg class="cabin-loader" viewBox="0 0 100 100" width="120" height="120">
+                <!-- Roof left slope -->
+                <line x1="50" y1="20" x2="20" y2="50" class="cabin-line roof-left"/>
+                <!-- Roof right slope -->
+                <line x1="50" y1="20" x2="80" y2="50" class="cabin-line roof-right"/>
+                <!-- Wall left -->
+                <line x1="20" y1="50" x2="20" y2="85" class="cabin-line wall-left"/>
+                <!-- Wall right -->
+                <line x1="80" y1="50" x2="80" y2="85" class="cabin-line wall-right"/>
+                <!-- Foundation -->
+                <line x1="20" y1="85" x2="80" y2="85" class="cabin-line foundation"/>
+                <!-- Door -->
+                <rect x="42" y="65" width="16" height="20" class="cabin-door"/>
+                <!-- Window left -->
+                <rect x="30" y="57" width="8" height="8" class="cabin-window"/>
+                <!-- Window right -->
+                <rect x="62" y="57" width="8" height="8" class="cabin-window"/>
+            </svg>
+            <p class="loading-text">The Lodge</p>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="container navbar-content">
             <div class="logo">
