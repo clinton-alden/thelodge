@@ -25,51 +25,51 @@ document.addEventListener('DOMContentLoaded', () => {
 const events = [
     {
         date: '2026-03-15',
-        title: 'Forest Management Field Trip',
-        description: 'Learn about timber harvesting and forest restoration practices with local foresters in the Cascade Range.',
-        location: 'Snoqualmie National Forest, WA'
+        title: 'add info here',
+        description: 'add info here',
+        location: 'add info here'
     },
     {
         date: '2026-03-22',
-        title: 'Yakima Basin Water Forum',
-        description: 'Explore agricultural water use, irrigation practices, and competing demands in one of Washington\'s most important agricultural regions.',
-        location: 'Yakima Valley, WA'
+        title: 'add info here',
+        description: 'add info here',
+        location: 'add info here'
     },
     {
         date: '2026-04-05',
-        title: 'Salmon Recovery Symposium',
-        description: 'Meet with fish biologists and restoration specialists working on Puget Sound salmon recovery projects.',
-        location: 'UW Campus & Snoqualmie River'
+        title: 'add info here',
+        description: 'add info here',
+        location: 'add info here'
     },
     {
         date: '2026-04-19',
-        title: 'Conservation Lands Tour',
-        description: 'Visit TNC and land trust properties to understand conservation easements and habitat protection strategies.',
-        location: 'Various Puget Sound Locations'
+        title: 'add info here',
+        description: 'add info here',
+        location: 'add info here'
     },
     {
         date: '2026-05-03',
-        title: 'Tribal Environmental Leadership',
-        description: 'Learn about indigenous land stewardship and natural resource management from tribal representatives.',
-        location: 'TBD - Tribal Lands'
+        title: 'add info here',
+        description: 'add info here',
+        location: 'add info here'
     },
     {
         date: '2026-05-17',
-        title: 'EPA & Regulatory Framework Workshop',
-        description: 'Understand environmental regulations and agency processes with EPA and state environmental department officials.',
-        location: 'EPA Office, Seattle'
+        title: 'add info here',
+        description: 'add info here',
+        location: 'add info here'
     },
     {
         date: '2026-06-07',
-        title: 'Mountain Lake Ecosystem Study',
-        description: 'Conduct field research and learn about alpine ecosystem dynamics from UW ecologists.',
-        location: 'Alpine Lakes Wilderness'
+        title: 'add info here',
+        description: 'add info here',
+        location: 'add info here'
     },
     {
         date: '2026-06-21',
-        title: 'Wetlands Restoration Field Work',
-        description: 'Participate in hands-on wetlands restoration and learn their ecological importance.',
-        location: 'Puget Sound Wetlands'
+        title: 'add info here',
+        description: 'add info here',
+        location: 'add info here'
     }
 ];
 
