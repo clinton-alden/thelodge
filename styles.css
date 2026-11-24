@@ -183,7 +183,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .lodge-icon {
-    color: var(--accent-gold);
+    height: 45px;
+    width: auto;
+    display: block;
 }
 
 .nav-links {
