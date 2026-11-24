@@ -673,7 +673,9 @@ footer p {
 }
 
 .lodge-icon {
-    color: var(--accent-gold);
+    height: 45px;
+    width: auto;
+    display: block;
 }
 
 .nav-links {
