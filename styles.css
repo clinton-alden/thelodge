@@ -1328,3 +1328,10 @@ footer p {
         gap: 1.5rem;
     }
 }
+
+/* Navigation Logo Size */
+.lodge-icon {
+    height: 90px;
+    width: auto;
+    display: block;
+}
