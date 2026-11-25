@@ -1,17 +1,27 @@
-- id: "trail-mixer"
-  title: "Trail Mixer"
-  date: "2026-11-19"
-  location: "University of Washington School of Law, Room 116"
-  description: "The Lodge welcomed new and returning members for a casual mixer to learn more about the club, meet fellow Lodgers, and build community over lunch."
-
-- id: "law-firm-climate-scorecard"
-  title: "2026 Law Firm Climate Scorecard Presentation"
-  date: "2026-11-18"
-  location: "University of Washington School of Law, Room 115"
-  description: "Co-hosted by The Lodge, the Environmental Law Society, and Law Students for Climate Accountability, this presentation explored the 2026 Law Firm Climate Scorecard and encouraged students to consider the role of the legal profession in addressing climate change."
-
-- id: "forest-ology-markworth-state-forest"
-  title: "Forest-ology: Markworth State Forest Hike"
-  date: "2026-11-14"
-  location: "Markworth State Forest, Washington"
-  description: "The Lodge partnered with the Legacy Forest Defense Coalition for an interdisciplinary forest hike exploring Washington forest management policy, the timber industry, old-growth forest conservation, and local plant and animal species."
+- id: trail-mixer
+  title: Trail Mixer
+  date: '2026-11-19'
+  location: University of Washington School of Law, Room 116
+  description: The Lodge welcomed new and returning members for a casual mixer to
+    learn more about the club, meet fellow Lodgers, and build community over lunch.
+- id: law-firm-climate-scorecard
+  title: 2026 Law Firm Climate Scorecard Presentation
+  date: '2026-11-18'
+  location: University of Washington School of Law, Room 115
+  description: Co-hosted by The Lodge, the Environmental Law Society, and Law Students
+    for Climate Accountability, this presentation explored the 2026 Law Firm Climate
+    Scorecard and encouraged students to consider the role of the legal profession
+    in addressing climate change.
+- id: forest-ology-markworth-state-forest
+  title: 'Forest-ology: Marckworth State Forest Hike'
+  date: '2026-11-14'
+  location: Marckworth State Forest, Washington
+  description: The Lodge partnered with the Legacy Forest Defense Coalition for an
+    interdisciplinary forest hike exploring Washington forest management policy, the
+    timber industry, old-growth forest conservation, and local plant and animal species.
+- id: forest-ology-tiger-mountain
+  title: 'Forest-ology: Tiger Mountain Field Trip'
+  date: '2026-05-09'
+  location: Tiger Mountain, Washington
+  description: An interdisciplinary forest outing co-led by Legacy Forest Defense
+    Coalition director Stephen Kropp and guest speakers.
