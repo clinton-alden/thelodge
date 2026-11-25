@@ -1,0 +1,94 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Lodge brings UW students together across environmental science, law, and policy through field trips, campus events, and community.">
+    <title>Photos - The Lodge</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="events.css">
+    <link rel="stylesheet" href="photos.css">
+</head>
+<body>
+    <!-- Loading Screen with Animated Cabin Icon -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-container">
+            <svg class="cabin-loader" viewBox="0 0 100 100" width="120" height="120" aria-hidden="true">
+                <line x1="50" y1="20" x2="20" y2="50" class="cabin-line roof-left"/>
+                <line x1="50" y1="20" x2="80" y2="50" class="cabin-line roof-right"/>
+                <line x1="20" y1="50" x2="20" y2="85" class="cabin-line wall-left"/>
+                <line x1="80" y1="50" x2="80" y2="85" class="cabin-line wall-right"/>
+                <line x1="20" y1="85" x2="80" y2="85" class="cabin-line foundation"/>
+                <rect x="42" y="65" width="16" height="20" class="cabin-door"/>
+                <rect x="30" y="57" width="8" height="8" class="cabin-window"/>
+                <rect x="62" y="57" width="8" height="8" class="cabin-window"/>
+            </svg>
+            <p class="loading-text">The Lodge</p>
+        </div>
+    </div>
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="container navbar-content">
+            <a class="logo" href="index.html" aria-label="The Lodge home">
+                <img src="assets/logo_no_background.png" alt="" class="lodge-icon">
+                <span>The Lodge</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="photos.html" class="active" aria-current="page">Photos</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        {% assign archive = site.data.past_events | sort: 'date' | reverse %}
+        {% assign photo_extensions = 'jpg,jpeg,png,webp,avif,gif' | split: ',' %}
+        {% assign all_files = site.static_files | sort: 'path' %}
+        {% assign photo_count = 0 %}
+        <section class="section" id="photo-gallery">
+            <div class="container">
+                <h2>Photos</h2>
+                <p class="section-intro">A collection of moments from our field trips, campus gatherings, and adventures together. Select any photograph to explore the gallery.</p>
+                <div class="lodge-gallery">
+                    {% for event in archive %}
+                        {% assign folder_prefix = '/assets/events/' | append: event.id | append: '/' %}
+                        {% assign prefix_length = folder_prefix | size %}
+                        {% for file in all_files %}
+                            {% assign prefix = file.path | slice: 0, prefix_length %}
+                            {% assign extension = file.extname | remove: '.' | downcase %}
+                            {% assign basename = file.path | split: '/' | last | downcase | split: '.' | first %}
+                            {% if prefix == folder_prefix and photo_extensions contains extension and basename != '00-poster' and basename != 'poster' %}
+                                {% assign photo_count = photo_count | plus: 1 %}
+                                <figure class="gallery-tile">
+                                    <a class="gallery-photo" href="{{ file.path | relative_url | escape }}" data-event="{{ event.title | escape }}" aria-label="View photo from {{ event.title | escape }}">
+                                        <img src="{{ file.path | relative_url | escape }}" alt="Photo from {{ event.title | escape }}" loading="lazy" decoding="async">
+                                    </a>
+                                    <figcaption>{{ event.title | escape }}</figcaption>
+                                </figure>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                {% if photo_count == 0 %}<p class="archive-empty">Photos from our events are coming soon!</p>{% endif %}
+                <div class="action-links gallery-actions"><a class="secondary-button" href="events.html">Explore Our Events</a></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 The Lodge · A student-led community for environmental collaboration at the University of Washington.</p>
+        </div>
+        <p class="footer-instagram"><a href="https://www.instagram.com/thelodge.uw/" target="_blank" rel="noopener noreferrer">Instagram · @thelodge.uw</a></p>
+    </footer>
+    <dialog id="photo-viewer" aria-labelledby="photo-title">
+        <header class="viewer-header"><h2 id="photo-title"></h2><button type="button" id="photo-close" aria-label="Close photos">✕</button></header>
+        <div class="viewer-stage"><button type="button" id="photo-prev" aria-label="Previous photo">‹</button><img id="photo-image" alt=""><button type="button" id="photo-next" aria-label="Next photo">›</button></div>
+        <div class="viewer-bottom"><span id="photo-count" aria-live="polite"></span><a id="photo-original" target="_blank" rel="noopener">Open original</a></div>
+    </dialog>
+    <script src="script.js"></script>
+    <script src="event-photos.js"></script>
+</body>
+</html>

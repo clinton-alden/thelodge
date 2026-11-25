@@ -734,3 +734,6 @@ button.calendar-day.has-event:hover { background: var(--primary-dark); }
 /* Social link */
 .footer-instagram { margin-top: .65rem; }
 .footer-instagram a { color: var(--accent-gold); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Keep the five navigation links comfortable on smaller desktop screens. */
+@media (min-width: 769px) and (max-width: 1050px) { .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: flex-end; } .navbar-content { gap: 1rem; } }

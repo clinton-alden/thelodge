@@ -9,7 +9,9 @@
     const next = document.getElementById('photo-next');
     const close = document.getElementById('photo-close');
     let photos = [], index = 0, trigger = null, touchStart = null;
+    let galleryTitles = null;
     function show() {
+        if (galleryTitles) title.textContent = galleryTitles[index];
         image.src = photos[index];
         image.alt = `${title.textContent}, photo ${index + 1}`;
         original.href = photos[index];
@@ -22,7 +24,16 @@
         const card = button.closest('.archive-card');
         photos = Array.from(card.querySelectorAll('.photo-sources a'), a => a.href);
         if (!photos.length) return;
-        trigger = button; index = 0; title.textContent = card.querySelector('h3').textContent;
+        galleryTitles = null; trigger = button; index = 0; title.textContent = card.querySelector('h3').textContent;
+        show(); viewer.showModal(); document.body.classList.add('photo-viewer-open'); close.focus();
+    }));
+    const galleryLinks = Array.from(document.querySelectorAll('.gallery-photo'));
+    galleryLinks.forEach((link, i) => link.addEventListener('click', e => {
+        if (typeof viewer.showModal !== 'function' || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        photos = galleryLinks.map(a => a.href);
+        galleryTitles = galleryLinks.map(a => a.dataset.event || 'The Lodge');
+        trigger = link; index = i;
         show(); viewer.showModal(); document.body.classList.add('photo-viewer-open'); close.focus();
     }));
     prev.addEventListener('click', () => move(-1)); next.addEventListener('click', () => move(1));

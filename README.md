@@ -105,6 +105,10 @@ To add photos later, upload them to the existing event folder. To replace a post
 
 For performance, aim for a longest edge around 1600–2000 pixels and ideally less than 1 MB per photo. Do not upscale low-resolution images. Preserve readable poster text and original aspect ratios. Only publish photographs you have permission to share publicly; consider removing embedded GPS metadata. Git history may retain deleted files, so do not upload sensitive images in the first place.
 
+### The Photos page (all events)
+
+The navigation link **Photos** opens `photos.html`, an automatically compiled gallery of photographs from every event listed in `_data/past_events.yml`. It uses the same original files as the individual event albums, excludes `00-poster` and `poster` images, and orders events newest first and images alphabetically within each event. No separate photo folder or gallery data file is needed. Click any thumbnail to open the full-window viewer at that image, then use arrows, keyboard, or swipe to browse across the entire collection. Thumbnails may crop to fit the grid; the viewer shows the full image. Adding or deleting photos in an archived event folder updates both pages on the next successful GitHub Pages build. An event needs a matching YAML entry before its photos appear. The homepage Explore Our Events button opens the dedicated Events page.
+
 ## 6. Current archive example (November 2026)
 
 ```text
@@ -138,6 +142,8 @@ The May 9 Tiger Mountain event has five photographs. The November 14 Marckworth 
 | `index.html` | Homepage introduction, upcoming calendar, Get Involved |
 | `about.html` | Club story, mission, field trips, membership and involvement |
 | `events.html` | Upcoming calendar, Jekyll-generated past events, photo viewer markup |
+| `photos.html` | Automatically compiled all-event photo gallery |
+| `photos.css` | Photo grid styling |
 | `styles.css` | Shared design, navigation, typography, responsive styling and cabin animation |
 | `events.css` | Past event cards and full-window viewer styling |
 | `script.js` | Upcoming event data, shared calendar logic and loading screen behavior |
@@ -150,9 +156,9 @@ The May 9 Tiger Mountain event has five photographs. The November 14 Marckworth 
 | `.gitignore` | Git exclusions |
 | `README.md` | This maintenance guide |
 
-For routine event updates, edit only `script.js`, `_data/past_events.yml`, and the relevant event image folders. Preserve the two `---` lines at the very beginning of `events.html`: Jekyll needs that front matter to process the archive. Do not add a `.nojekyll` file or disable Jekyll processing. Leave the animated cabin and shared page structure alone unless a redesign is intended.
+For routine event updates, edit only `script.js`, `_data/past_events.yml`, and the relevant event image folders. Preserve the two `---` lines at the very beginning of `events.html` and `photos.html`: Jekyll needs that front matter to process the archive. Do not add a `.nojekyll` file or disable Jekyll processing. Leave the animated cabin and shared page structure alone unless a redesign is intended.
 
-Contact details and Instagram links are repeated in the HTML files. If they change, update all three pages; the calendar's listserv fallback link is also in `script.js`. Update this README as well. The website currently uses `thelodge@uw.edu`; older event flyers show `legallodge@uw.edu`. Confirm the preferred club mailbox internally before changing the live contact links.
+Contact details and Instagram links are repeated in the HTML files. If they change, update all four pages; the calendar's listserv fallback link is also in `script.js`. Update this README as well. The website currently uses `thelodge@uw.edu`; older event flyers show `legallodge@uw.edu`. Confirm the preferred club mailbox internally before changing the live contact links.
 
 ## 8. Backups and recovering from mistakes
 
@@ -169,10 +175,11 @@ To download a snapshot for review, use the green Code button → Download ZIP on
 | Event appears but poster is missing | Confirm exact ID/folder match, supported image format, and that the image was committed. |
 | Wrong poster | Open the actual image in the event folder; replace it with the correct artwork and remove duplicate posters. |
 | Photos button missing | Upload actual supported images to that event folder; a poster alone intentionally does not create a button. |
+| Photos page missing an image | Verify the event is listed in YAML, the folder ID matches, the image is supported and not named as a poster, and Pages has rebuilt. |
 | Wrong photos or duplicates | Remove misplaced files from the wrong folder after verifying their correct copies. Uploading a new ZIP's contents does not delete obsolete files. |
 | Calendar blank or broken | Check the `events` array for missing commas, quotation marks, brackets, or invalid dates. Restore the last working version if needed. |
-| Raw Liquid template text appears | Confirm Jekyll is enabled and `events.html` begins with the required front matter. |
-| Instagram opens the wrong profile | Verify the URL and displayed handle in all three HTML footers. |
+| Raw Liquid template text appears | Confirm Jekyll is enabled and `events.html` and `photos.html` begin with the required front matter. |
+| Instagram opens the wrong profile | Verify the URL and displayed handle in all four HTML footers. |
 | GitHub will not upload a folder | Use the `.gitkeep` method in section 4, then upload the individual images. |
 
-After publishing, visit the homepage, About Us, and Events pages. Verify the nav, calendar, listserv, email, Instagram, poster associations and photo viewer on desktop and mobile. Check that poster-only cards have no Photos button. For a development review, a fresh repository ZIP is useful, but a deployed browser test is still needed to verify the final rendered site.
+After publishing, visit the homepage, About Us, Events, and Photos pages. Verify the nav, calendar, listserv, email, Instagram, poster associations and photo viewer on desktop and mobile. Check that poster-only cards have no Photos button. For a development review, a fresh repository ZIP is useful, but a deployed browser test is still needed to verify the final rendered site.
