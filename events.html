@@ -1,0 +1,141 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Lodge brings UW students together across environmental science, law, and policy through field trips, campus events, and community.">
+    <title>Events - The Lodge</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="events.css">
+</head>
+<body>
+    <!-- Loading Screen with Animated Cabin Icon -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-container">
+            <svg class="cabin-loader" viewBox="0 0 100 100" width="120" height="120" aria-hidden="true">
+                <line x1="50" y1="20" x2="20" y2="50" class="cabin-line roof-left"/>
+                <line x1="50" y1="20" x2="80" y2="50" class="cabin-line roof-right"/>
+                <line x1="20" y1="50" x2="20" y2="85" class="cabin-line wall-left"/>
+                <line x1="80" y1="50" x2="80" y2="85" class="cabin-line wall-right"/>
+                <line x1="20" y1="85" x2="80" y2="85" class="cabin-line foundation"/>
+                <rect x="42" y="65" width="16" height="20" class="cabin-door"/>
+                <rect x="30" y="57" width="8" height="8" class="cabin-window"/>
+                <rect x="62" y="57" width="8" height="8" class="cabin-window"/>
+            </svg>
+            <p class="loading-text">The Lodge</p>
+        </div>
+    </div>
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="container navbar-content">
+            <a class="logo" href="index.html" aria-label="The Lodge home">
+                <img src="assets/logo_no_background.png" alt="" class="lodge-icon">
+                <span>The Lodge</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="events.html" class="active" aria-current="page">Events</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <section id="events" class="section alt">
+            <div class="container">
+                <h2>Upcoming Events</h2>
+                <p class="section-intro">From forests and rivers to coastlines and communities, our events explore environmental issues across the Pacific Northwest through field trips, conversations with practitioners, on-campus programming, and opportunities to connect with students from across UW.</p>
+                <div class="calendar-controls">
+                    <button type="button" class="calendar-btn" id="prevMonth" aria-label="Previous month">← Prev</button>
+                    <h3 id="currentMonth" aria-live="polite"></h3>
+                    <button type="button" class="calendar-btn" id="nextMonth" aria-label="Next month">Next →</button>
+                </div>
+                <div class="events-container">
+                    <div class="calendar-month" id="calendarMonth" aria-label="Event calendar"></div>
+                    <div class="events-list" id="eventsList" aria-live="polite"></div>
+                </div>
+                <p class="calendar-note">Select a highlighted date to see its events. <button type="button" class="text-button" id="showAllEvents">Show all events this month</button></p>
+                <noscript><p class="section-intro">Enable JavaScript to view the calendar, or join our mailing list for event announcements.</p></noscript>
+            </div>
+        </section>
+        {% assign archive = site.data.past_events | sort: 'date' | reverse %}
+        {% assign photo_extensions = 'jpg,jpeg,png,webp,avif,gif' | split: ',' %}
+        {% assign all_files = site.static_files | sort: 'path' %}
+        <section class="section" id="event-archive">
+            <div class="container">
+                <h2>Past Events</h2>
+                <p class="section-intro">Explore our past field trips, campus gatherings, and conversations across disciplines. Scroll through the events and open an album to see more.</p>
+                <div class="archive-strip" tabindex="0" role="region" aria-label="Past events, scroll horizontally">
+                    {% for event in archive %}
+                        {% assign folder_prefix = '/assets/events/' | append: event.id | append: '/' %}
+                        {% assign prefix_length = folder_prefix | size %}
+                        {% assign cover = nil %}
+                        {% assign photo_count = 0 %}
+                        {% for file in all_files %}
+                            {% assign prefix = file.path | slice: 0, prefix_length %}
+                            {% assign extension = file.extname | remove: '.' | downcase %}
+                            {% if prefix == folder_prefix and photo_extensions contains extension %}
+                                {% assign photo_count = photo_count | plus: 1 %}
+                                {% unless cover %}{% assign cover = file %}{% endunless %}
+                            {% endif %}
+                        {% endfor %}
+                        <article class="archive-card" id="{{ event.id | escape }}">
+                            <div class="archive-summary{% unless cover %} no-cover{% endunless %}">
+                                {% if cover %}
+                                <div class="archive-cover">
+                                    <img src="{{ cover.path | relative_url | escape }}" alt="Photo from {{ event.title | escape }}" loading="lazy" decoding="async">
+                                </div>
+                                {% else %}
+                                <div class="archive-cover archive-placeholder">The Lodge</div>
+                                {% endif %}
+                                <div class="archive-copy">
+                                    <p class="event-date"><time datetime="{{ event.date | escape }}">{{ event.date | date: '%B %d, %Y' }}</time></p>
+                                    <h3>{{ event.title | escape }}</h3>
+                                    {% if event.location %}<p class="event-location">📍 {{ event.location | escape }}</p>{% endif %}
+
+                                </div>
+                            </div>
+                            <details class="archive-album">
+                                <summary>Event recap{% if photo_count > 0 %} &amp; photos ({{ photo_count }}){% endif %}</summary>
+                                <p class="archive-description">{{ event.description | escape | newline_to_br }}</p>
+                                {% if photo_count > 0 %}
+                                <div class="album-grid">
+                                    {% for file in all_files %}
+                                        {% assign prefix = file.path | slice: 0, prefix_length %}
+                                        {% assign extension = file.extname | remove: '.' | downcase %}
+                                        {% if prefix == folder_prefix and photo_extensions contains extension %}
+                                        <a href="{{ file.path | relative_url | escape }}" target="_blank" rel="noopener">
+                                            <img src="{{ file.path | relative_url | escape }}" alt="Photo from {{ event.title | escape }}" loading="lazy" decoding="async">
+                                        </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </details>
+                        </article>
+                    {% else %}
+                        <p class="archive-empty">We’ll be sharing photos and stories from our past events here soon. Stay tuned!</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container centered-content">
+                <h2>Come Along Next Time</h2>
+                <p>Join our listserv for upcoming outings and campus events, or email us with questions or ideas.</p>
+                <div class="action-links">
+                    <a class="cta-button" href="https://mailman23.u.washington.edu/mailman/listinfo/thelodge" target="_blank" rel="noopener noreferrer">Join Our Listserv</a>
+                    <a class="secondary-button" href="mailto:thelodge@uw.edu">Email Us</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 The Lodge · A student-led community for environmental collaboration at the University of Washington.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
