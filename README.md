@@ -78,3 +78,6 @@ Email: thelodge@uw.edu
 
 © 2026 The Lodge. A collaboration of UW Law and Environmental Graduate Students.
 
+
+## Past events and photo viewer
+Edit `_data/past_events.yml`; each event ID must match its folder under `assets/events/`. Name its poster `00-poster.png` or `00-poster.jpg`. All other supported images in that folder are shown in the Photos viewer in filename order. Poster-only events have no Photos button. Add images and commit to publish.

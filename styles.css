@@ -730,3 +730,7 @@ button.calendar-day.has-event:hover { background: var(--primary-dark); }
     .loading-screen { display: none; }
     *, *::before, *::after { transition: none !important; }
 }
+
+/* Social link */
+.footer-instagram { margin-top: .65rem; }
+.footer-instagram a { color: var(--accent-gold); text-decoration: underline; text-underline-offset: 3px; }

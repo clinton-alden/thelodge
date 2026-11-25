@@ -65,7 +65,7 @@
         <section class="section" id="event-archive">
             <div class="container">
                 <h2>Past Events</h2>
-                <p class="section-intro">Explore our past field trips, campus gatherings, and conversations across disciplines. Scroll through the events and open an album to see more.</p>
+                <p class="section-intro">Explore our past field trips, campus gatherings, and conversations across disciplines. Scroll through our event posters and select Photos to explore available event photographs.</p>
                 <div class="archive-strip" tabindex="0" role="region" aria-label="Past events, scroll horizontally">
                     {% for event in archive %}
                         {% assign folder_prefix = '/assets/events/' | append: event.id | append: '/' %}
@@ -77,11 +77,13 @@
                             {% assign prefix = file.path | slice: 0, prefix_length %}
                             {% assign extension = file.extname | remove: '.' | downcase %}
                             {% if prefix == folder_prefix and photo_extensions contains extension %}
-                                {% assign photo_count = photo_count | plus: 1 %}
+                                
                                 {% unless cover %}{% assign cover = file %}{% endunless %}
                                 {% assign basename = file.path | split: '/' | last | downcase | split: '.' | first %}
                                 {% if basename == '00-poster' or basename == 'poster' %}
                                     {% unless poster %}{% assign poster = file %}{% endunless %}
+                                {% else %}
+                                    {% assign photo_count = photo_count | plus: 1 %}
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
@@ -102,28 +104,21 @@
 
                                 </div>
                             </div>
-                            <details class="archive-album">
-                                <summary>Event recap{% if photo_count > 0 %} &amp; images ({{ photo_count }}){% endif %}</summary>
-                                <p class="archive-description">{{ event.description | escape | newline_to_br }}</p>
-                                {% if photo_count > 0 %}
-                                <div class="album-grid">
-                                    {% if poster %}
-                                    <a class="album-poster" href="{{ poster.path | relative_url | escape }}" target="_blank" rel="noopener">
-                                        <img src="{{ poster.path | relative_url | escape }}" alt="Original event poster for {{ event.title | escape }}" loading="lazy" decoding="async">
-                                    </a>
-                                    {% endif %}
+                            {% if photo_count > 0 %}
+                            <div class="archive-album">
+                                <button type="button" class="photos-button" aria-label="Photos from {{ event.title | escape }}">Photos ({{ photo_count }})</button>
+                                <div class="photo-sources" hidden>
                                     {% for file in all_files %}
                                         {% assign prefix = file.path | slice: 0, prefix_length %}
                                         {% assign extension = file.extname | remove: '.' | downcase %}
-                                        {% if prefix == folder_prefix and photo_extensions contains extension and file.path != poster.path %}
-                                        <a href="{{ file.path | relative_url | escape }}" target="_blank" rel="noopener">
-                                            <img src="{{ file.path | relative_url | escape }}" alt="Photo from {{ event.title | escape }}" loading="lazy" decoding="async">
-                                        </a>
+                                        {% assign basename = file.path | split: '/' | last | downcase | split: '.' | first %}
+                                        {% if prefix == folder_prefix and photo_extensions contains extension and basename != '00-poster' and basename != 'poster' %}
+                                        <a href="{{ file.path | relative_url | escape }}">Photo</a>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
-                                {% endif %}
-                            </details>
+                            </div>
+                            {% endif %}
                         </article>
                     {% else %}
                         <p class="archive-empty">We’ll be sharing photos and stories from our past events here soon. Stay tuned!</p>
@@ -146,7 +141,14 @@
         <div class="container">
             <p>&copy; 2026 The Lodge · A student-led community for environmental collaboration at the University of Washington.</p>
         </div>
+        <p class="footer-instagram"><a href="https://www.instagram.com/thelodge.edu/" target="_blank" rel="noopener noreferrer">Instagram · @thelodge.edu</a></p>
     </footer>
+    <dialog id="photo-viewer" aria-labelledby="photo-title">
+        <header class="viewer-header"><h2 id="photo-title"></h2><button type="button" id="photo-close" aria-label="Close photos">✕</button></header>
+        <div class="viewer-stage"><button type="button" id="photo-prev" aria-label="Previous photo">‹</button><img id="photo-image" alt=""><button type="button" id="photo-next" aria-label="Next photo">›</button></div>
+        <div class="viewer-bottom"><span id="photo-count" aria-live="polite"></span><a id="photo-original" target="_blank" rel="noopener">Open original</a></div>
+    </dialog>
     <script src="script.js"></script>
+    <script src="event-photos.js"></script>
 </body>
 </html>
