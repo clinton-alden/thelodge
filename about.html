@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Lodge brings UW students together across environmental science, law, and policy through field trips, campus events, and community.">
     <title>About Us - The Lodge</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -10,180 +11,159 @@
     <!-- Loading Screen with Animated Cabin Icon -->
     <div id="loadingScreen" class="loading-screen">
         <div class="loading-container">
-            <svg class="cabin-loader" viewBox="0 0 100 100" width="120" height="120">
-                <!-- Roof left slope -->
+            <svg class="cabin-loader" viewBox="0 0 100 100" width="120" height="120" aria-hidden="true">
                 <line x1="50" y1="20" x2="20" y2="50" class="cabin-line roof-left"/>
-                <!-- Roof right slope -->
                 <line x1="50" y1="20" x2="80" y2="50" class="cabin-line roof-right"/>
-                <!-- Wall left -->
                 <line x1="20" y1="50" x2="20" y2="85" class="cabin-line wall-left"/>
-                <!-- Wall right -->
                 <line x1="80" y1="50" x2="80" y2="85" class="cabin-line wall-right"/>
-                <!-- Foundation -->
                 <line x1="20" y1="85" x2="80" y2="85" class="cabin-line foundation"/>
-                <!-- Door -->
                 <rect x="42" y="65" width="16" height="20" class="cabin-door"/>
-                <!-- Window left -->
                 <rect x="30" y="57" width="8" height="8" class="cabin-window"/>
-                <!-- Window right -->
                 <rect x="62" y="57" width="8" height="8" class="cabin-window"/>
             </svg>
             <p class="loading-text">The Lodge</p>
         </div>
     </div>
-
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Main navigation">
         <div class="container navbar-content">
-            <div class="logo">
-                <img src="assets/logo_no_background.png" alt="The Lodge logo" class="lodge-icon">
-                <h1>The Lodge</h1>
-            </div>
+            <a class="logo" href="index.html" aria-label="The Lodge home">
+                <img src="assets/logo_no_background.png" alt="" class="lodge-icon">
+                <span>The Lodge</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="about.html" class="active" aria-current="page">About Us</a></li>
                 <li><a href="index.html#events">Events</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
-
-    <header class="hero" style="padding: 4rem 0; min-height: 300px;">
+    <header class="hero hero-about">
         <div class="hero-background"></div>
         <div class="container hero-content">
             <h1>About The Lodge</h1>
-            <p class="subtitle" style="margin-bottom: 0;">A collaborative space for environmental leadership</p>
+            <p class="subtitle">A collaborative space for environmental leadership</p>
         </div>
     </header>
-
     <main>
         <section class="section">
             <div class="container">
                 <h2>Our Story</h2>
                 <div class="about-content">
-                    <p>add info here</p>
-                    
-                    <p>add info here</p>
+                    <p>Surrounded by forests, rivers, volcanoes, and fjords, the University of Washington is home to exceptional programs in environmental science, law, and policy. Yet, despite the interconnected nature of environmental challenges and the likelihood that graduates of these programs will work alongside one another throughout their careers, opportunities for students to interact across disciplines remain surprisingly limited.</p>
+                    <p>The Lodge was founded to bridge those divides. Through expert-led field trips, on-campus discussions, and social gatherings, we bring together students from across UW to explore the pressing environmental issues of our time, learn from one another, and build lasting connections across disciplines.</p>
+                    <p>At the heart of The Lodge is a belief that responsible and effective environmental stewardship requires not only an understanding of science, law, and policy, but also a meaningful connection to the lands, waters, and communities our work affects. By getting outside together and learning directly from the people who study, manage, protect, and depend on these landscapes, we hope to foster a more collaborative, thoughtful, and effective generation of environmental professionals.</p>
+                    <p>Above all, The Lodge is about building community, exploring the incredible landscapes of the Pacific Northwest, and having fun along the way. Whatever your academic background or career aspirations, if you care about the environment, there is a place for you here.</p>
                 </div>
             </div>
         </section>
-
         <section class="section alt">
             <div class="container">
                 <h2>Our Mission</h2>
                 <div class="mission-detailed">
                     <div class="mission-block">
                         <h3>🌍 Interdisciplinary Learning</h3>
-                        <p>add info here</p>
+                        <p>Break down barriers between science, law, and policy by creating opportunities for students to learn from one another, develop literacy outside their own disciplines, and approach environmental challenges from new perspectives.</p>
                     </div>
                     <div class="mission-block">
                         <h3>🏕️ Experiential Education</h3>
-                        <p>add info here</p>
+                        <p>Take learning beyond the classroom and into the forests, rivers, coastlines, and communities of the Pacific Northwest, exploring firsthand the complex environmental issues that shape our region.</p>
                     </div>
                     <div class="mission-block">
-                        <h3>🤝 Stakeholder Engagement</h3>
-                        <p>add info here</p>
+                        <h3>🤝 Community &amp; Engagement</h3>
+                        <p>Build relationships across campus and beyond by connecting students with researchers, land managers, policymakers, tribal nations, community organizations, and other environmental practitioners.</p>
                     </div>
                     <div class="mission-block">
-                        <h3>💡 Professional Development</h3>
-                        <p>add info here</p>
+                        <h3>💡 Environmental Leadership</h3>
+                        <p>Cultivate a generation of environmental professionals who value collaboration, understand the landscapes and communities their work affects, and are equipped to tackle complex challenges together.</p>
                     </div>
                 </div>
             </div>
         </section>
-
         <section class="section">
             <div class="container">
                 <h2>Our Field Trips</h2>
-                <p style="text-align: center; margin-bottom: 2rem; font-size: 1.05rem;">The Lodge regularly organizes field trips to diverse environmental locations and with various stakeholders:</p>
-                
+                <p class="section-intro">Each quarter, The Lodge explores a different environmental theme — what we like to call an "ology." Through expert-led outings and complementary on-campus events, we examine environmental issues from scientific, legal, policy, and community perspectives. Our field trips might take us anywhere from the old-growth forests of western Washington to the agricultural landscapes of the Columbia River Basin or the tidepools of the Pacific coast.</p>
                 <div class="trip-types-grid">
                     <div class="trip-type">
-                        <h4>🌲 Forest Management</h4>
-                        <p>Learn about forestry practices, timber management, wildfire prevention, and ecosystem restoration with local foresters and land managers.</p>
+                        <h3>🌲 Forests &amp; Forestry</h3>
+                        <p>Explore forest ecology, timber management, wildfire, biodiversity conservation, and the legal and policy frameworks shaping the future of Washington's forests.</p>
                     </div>
                     <div class="trip-type">
-                        <h4>💧 Water & Agriculture</h4>
-                        <p>Explore water resource challenges in agricultural regions, including irrigation practices, basin management, and competing uses.</p>
+                        <h3>💧 Water &amp; Agriculture</h3>
+                        <p>Learn about water allocation, agricultural practices, water quality, and the challenges of balancing human and ecological water needs across the region.</p>
                     </div>
                     <div class="trip-type">
-                        <h4>🏞️ Conservation Lands</h4>
-                        <p>Visit protected areas and conservation projects to understand land acquisition, habitat restoration, and wildlife management.</p>
+                        <h3>🏞️ Lands &amp; Conservation</h3>
+                        <p>Explore protected landscapes, habitat restoration, land-use decisions, and innovative approaches to biodiversity conservation.</p>
                     </div>
                     <div class="trip-type">
-                        <h4>🌊 Watershed & Fisheries</h4>
-                        <p>Study salmon recovery, river restoration, dam management, and fish habitat conservation efforts across the Pacific Northwest.</p>
+                        <h3>🐟 Rivers &amp; Fisheries</h3>
+                        <p>Examine salmon recovery, watershed health, river restoration, and the intersection of fisheries science, resource management, and environmental law.</p>
                     </div>
                     <div class="trip-type">
-                        <h4>🏛️ Environmental Policy</h4>
-                        <p>Meet with agencies like the EPA, USFS, and state environmental departments to understand regulatory frameworks and implementation.</p>
+                        <h3>🌊 Oceans &amp; Coastlines</h3>
+                        <p>Explore marine ecosystems, coastal communities, shellfish and fisheries management, and the challenges of protecting our marine environments.</p>
                     </div>
                     <div class="trip-type">
-                        <h4>🌾 Tribal Stewardship</h4>
-                        <p>Learn from tribal nations about traditional ecological knowledge, sovereignty, and contemporary environmental leadership.</p>
+                        <h3>🌾 Communities &amp; Stewardship</h3>
+                        <p>Learn from tribal nations, local communities, and other practitioners about the relationships between people, natural resources, governance, and environmental stewardship.</p>
                     </div>
                 </div>
             </div>
         </section>
-
         <section class="section alt">
             <div class="container">
                 <h2>Who We Are</h2>
-                <div class="members-section">
-                    <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary-dark);">Bringing Diverse Perspectives Together</h3>
-                    
-                    <div class="member-groups">
-                        <div class="member-group">
-                            <h4>⚖️ UW Law Students</h4>
-                            <p>add info here</p>
-                        </div>
-                        <div class="member-group">
-                            <h4>🔬 Environmental Science Graduate Students</h4>
-                            <p>add info here</p>
-                        </div>
-                        <div class="member-group">
-                            <h4>🌱 Natural Resources & Forestry Students</h4>
-                            <p>add info here</p>
-                        </div>
-                        <div class="member-group">
-                            <h4>🎓 Faculty & Advisors</h4>
-                            <p>add info here</p>
-                        </div>
-                    </div>
+                <div class="about-content">
+                    <p>The Lodge is a student-led community spanning disciplines, departments, and degree programs at the University of Washington. Our members bring diverse academic backgrounds, professional interests, and personal experiences, united by a shared curiosity about the natural world and a desire to make a positive environmental impact.</p>
+                    <p>Our community includes students from:</p>
+                    <ul class="department-list">
+                        <li>School of Law</li>
+                        <li>School of Aquatic and Fishery Sciences (SAFS)</li>
+                        <li>School of Environmental and Forest Sciences (SEFS)</li>
+                        <li>School of Marine and Environmental Affairs (SMEA)</li>
+                        <li>Department of Civil &amp; Environmental Engineering (CEE)</li>
+                        <li>Evans School of Public Policy &amp; Governance</li>
+                        <li>Other programs across the University of Washington</li>
+                    </ul>
+                    <p>You don't need to study environmental science, law, or policy to join us. Undergraduate and graduate students from all disciplines are welcome, and no prior experience is necessary. Bring your curiosity, your perspective, and your friends!</p>
                 </div>
             </div>
         </section>
-
-        <section class="section">
+        <section id="get-involved" class="section">
             <div class="container">
                 <h2>Get Involved</h2>
                 <div class="involvement-cards">
                     <div class="involvement-card">
                         <h3>✉️ Join Our Mailing List</h3>
-                        <p>Stay informed about upcoming field trips, events, and opportunities by joining <a href="https://mailman23.u.washington.edu/mailman/listinfo/thelodge" target="_blank" rel="noopener noreferrer">The Lodge's listserv</a>.</p>
+                        <p>The best way to stay connected with The Lodge is through our <a href="https://mailman23.u.washington.edu/mailman/listinfo/thelodge" target="_blank" rel="noopener noreferrer">listserv</a>. Sign up to hear about upcoming field trips, campus events, and other opportunities.</p>
                     </div>
                     <div class="involvement-card">
-                        <h3>🚗 Attend a Field Trip</h3>
-                        <p>No prior experience necessary! Field trips are open to all UW students interested in environmental issues, getting outside, and learning through multidisciplinary perspectives. Bring your friends!</p>
+                        <h3>🥾 Come Along</h3>
+                        <p>No prior experience necessary! Our events are open to all UW students interested in the environment, getting outside, and meeting people from across campus. Bring your friends! Join our <a href="https://mailman23.u.washington.edu/mailman/listinfo/thelodge" target="_blank" rel="noopener noreferrer">listserv</a> for event announcements.</p>
                     </div>
                     <div class="involvement-card">
-                        <h3>🤝 Suggest a Trip</h3>
-                        <p>Have a topic you'd love to explore or a location you'd like to visit? We'd love to hear your ideas! Email us at <a href="mailto:thelodge@uw.edu">thelodge@uw.edu</a> with any suggestions!</p>
+                        <h3>💬 Share Your Ideas</h3>
+                        <p>Is there an environmental issue you've always wanted to explore, a place you'd love to visit, or someone you'd like to hear from? <a href="mailto:thelodge@uw.edu">Email us</a> with your ideas!</p>
                     </div>
                     <div class="involvement-card">
-                        <h3>📚 Volunteer</h3>
-                        <p>Help organize trips, manage communications, or support other aspects of The Lodge by volunteering or joining our leadership team. We're currently recruiting student liasons from env science programs including SAFS, CEE, SEFS, SMEA, and more! Email us at Email us at <a href="mailto:thelodge@uw.edu">thelodge@uw.edu</a> to learn more!</p>
+                        <h3>🌱 Join Our Leadership Team</h3>
+                        <p>Help shape the future of The Lodge! We're looking for student representatives from departments across UW to help organize events, build connections, and grow our community. Leadership roles are flexible. <a href="mailto:thelodge@uw.edu">Email us</a> to learn more.</p>
                     </div>
+                </div>
+                <div class="action-links">
+                    <a class="cta-button" href="https://mailman23.u.washington.edu/mailman/listinfo/thelodge" target="_blank" rel="noopener noreferrer">Join Our Listserv</a>
+                    <a class="secondary-button" href="mailto:thelodge@uw.edu">Email Us</a>
                 </div>
             </div>
         </section>
     </main>
-
     <footer>
         <div class="container">
-            <p>&copy; 2026 The Lodge. A collaboration of UW Law and Environmental Graduate Students.</p>
+            <p>&copy; 2026 The Lodge · A student-led community for environmental collaboration at the University of Washington.</p>
         </div>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>

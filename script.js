@@ -1,256 +1,177 @@
-// Loading screen - only show on first visit
+// THE LODGE — EVENT MANAGEMENT
+// Add real events inside the array below, using this format:
+// {
+//     date: '2027-01-15', // YYYY-MM-DD (example only)
+//     title: 'Event name',
+//     description: 'Time, details, and registration instructions.',
+//     location: 'Meeting location'
+// },
+// Save and commit this file in GitHub to publish your changes.
+// The example above is commented out and will not appear on the website.
+const events = [
+    // Add upcoming and past events here.
+];
+
+// Loading screen: preserve the original cabin animation on first visit.
 document.addEventListener('DOMContentLoaded', () => {
     const loadingScreen = document.getElementById('loadingScreen');
-    
-    // Check if this is the first page load (not a navigation)
-    if (!sessionStorage.getItem('lodgeVisited')) {
-        // First visit - show animation
-        sessionStorage.setItem('lodgeVisited', 'true');
-        
-        if (loadingScreen) {
-            // Loading screen will automatically fade out after animations complete
+    if (loadingScreen) {
+        let alreadyVisited = false;
+        try {
+            alreadyVisited = sessionStorage.getItem('lodgeVisited') === 'true';
+            sessionStorage.setItem('lodgeVisited', 'true');
+        } catch (error) {
+            // If browser storage is blocked, the CSS animation still finishes.
+        }
+        if (alreadyVisited) {
+            loadingScreen.style.display = 'none';
+        } else {
             setTimeout(() => {
                 loadingScreen.style.pointerEvents = 'none';
             }, 2300);
         }
-    } else {
-        // Already visited - hide loading screen immediately
-        if (loadingScreen) {
-            loadingScreen.style.display = 'none';
-        }
     }
+    initializeCalendar();
 });
 
-// Sample Events Data - Can be updated with real events
-const events = [
-    {
-        date: '2026-03-15',
-        title: 'add info here',
-        description: 'add info here',
-        location: 'add info here'
-    },
-    {
-        date: '2026-03-22',
-        title: 'add info here',
-        description: 'add info here',
-        location: 'add info here'
-    },
-    {
-        date: '2026-04-05',
-        title: 'add info here',
-        description: 'add info here',
-        location: 'add info here'
-    },
-    {
-        date: '2026-04-19',
-        title: 'add info here',
-        description: 'add info here',
-        location: 'add info here'
-    },
-    {
-        date: '2026-05-03',
-        title: 'add info here',
-        description: 'add info here',
-        location: 'add info here'
-    },
-    {
-        date: '2026-05-17',
-        title: 'add info here',
-        description: 'add info here',
-        location: 'add info here'
-    },
-    {
-        date: '2026-06-07',
-        title: 'add info here',
-        description: 'add info here',
-        location: 'add info here'
-    },
-    {
-        date: '2026-06-21',
-        title: 'add info here',
-        description: 'add info here',
-        location: 'add info here'
-    }
-];
+// Calendar — the date is always the first of the displayed month,
+// preventing skipped months when navigating from the 29th, 30th, or 31st.
+const now = new Date();
+let currentDate = new Date(now.getFullYear(), now.getMonth(), 1);
+const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
 
-let currentDate = new Date();
+function initializeCalendar() {
+    // The About page does not contain a calendar.
+    const requiredIds = ['prevMonth', 'nextMonth', 'currentMonth', 'calendarMonth', 'eventsList', 'showAllEvents'];
+    if (!requiredIds.every(id => document.getElementById(id))) return;
 
-// Navigation
-document.getElementById('prevMonth').addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() - 1);
+    document.getElementById('prevMonth').addEventListener('click', () => changeMonth(-1));
+    document.getElementById('nextMonth').addEventListener('click', () => changeMonth(1));
+    document.getElementById('showAllEvents').addEventListener('click', () => {
+        document.querySelectorAll('.calendar-day[aria-pressed]').forEach(button => {
+            button.setAttribute('aria-pressed', 'false');
+        });
+        renderEventsList();
+    });
     renderCalendar();
-});
+}
 
-document.getElementById('nextMonth').addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() + 1);
+function changeMonth(offset) {
+    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + offset, 1);
     renderCalendar();
-});
+}
+
+function dateKey(year, month, day) {
+    return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
+function formatDate(value) {
+    // Parse a calendar date locally, not as UTC midnight.
+    // This avoids showing the previous day in Pacific Time.
+    const [year, month, day] = value.split('-').map(Number);
+    return new Date(year, month - 1, day).toLocaleDateString('en-US', {
+        weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+    });
+}
 
 function renderCalendar() {
+    const calendarMonth = document.getElementById('calendarMonth');
+    if (!calendarMonth) return;
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
-    
-    // Update month display
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-                       'July', 'August', 'September', 'October', 'November', 'December'];
     document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
-    
-    // Get first day of month and number of days
+    calendarMonth.replaceChildren();
+
+    const header = document.createElement('div');
+    header.className = 'calendar-header';
+    ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(day => {
+        const element = document.createElement('div');
+        element.className = 'day-name';
+        element.textContent = day;
+        header.appendChild(element);
+    });
+    calendarMonth.appendChild(header);
+
+    const grid = document.createElement('div');
+    grid.className = 'calendar-grid';
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const daysInPrevMonth = new Date(year, month, 0).getDate();
-    
-    // Build calendar
-    const calendarMonth = document.getElementById('calendarMonth');
-    calendarMonth.innerHTML = '';
-    
-    // Day names
-    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const headerDiv = document.createElement('div');
-    headerDiv.className = 'calendar-header';
-    dayNames.forEach(day => {
-        const dayEl = document.createElement('div');
-        dayEl.className = 'day-name';
-        dayEl.textContent = day;
-        headerDiv.appendChild(dayEl);
-    });
-    calendarMonth.appendChild(headerDiv);
-    
-    // Calendar grid
-    const gridDiv = document.createElement('div');
-    gridDiv.className = 'calendar-grid';
-    
-    // Previous month days
-    for (let i = firstDay - 1; i >= 0; i--) {
-        const dayEl = createDayElement(daysInPrevMonth - i, 'other-month', year, month - 1);
-        gridDiv.appendChild(dayEl);
-    }
-    
-    // Current month days
-    for (let day = 1; day <= daysInMonth; day++) {
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const hasEvent = events.some(e => e.date === dateStr);
-        const isToday = isDateToday(day, month, year);
-        
-        let className = '';
-        if (isToday) className = 'today';
-        else if (hasEvent) className = 'has-event';
-        
-        const dayEl = createDayElement(day, className, year, month, dateStr, hasEvent);
-        dayEl.addEventListener('click', () => {
-            if (hasEvent) {
-                filterEventsByDate(dateStr);
-            }
-        });
-        gridDiv.appendChild(dayEl);
-    }
-    
-    // Next month days
-    const totalCells = gridDiv.children.length;
-    for (let day = 1; totalCells + day <= 42; day++) {
-        const dayEl = createDayElement(day, 'other-month', year, month + 1);
-        gridDiv.appendChild(dayEl);
-    }
-    
-    calendarMonth.appendChild(gridDiv);
-    
-    // Render events list
-    renderEventsList(year, month);
-}
-
-function createDayElement(day, className = '', year, month, dateStr = '', hasEvent = false) {
-    const el = document.createElement('div');
-    el.className = `calendar-day ${className}`;
-    if (hasEvent) el.style.cursor = 'pointer';
-    el.textContent = day;
-    return el;
-}
-
-function isDateToday(day, month, year) {
     const today = new Date();
-    return day === today.getDate() && 
-           month === today.getMonth() && 
-           year === today.getFullYear();
+    const todayKey = dateKey(today.getFullYear(), today.getMonth(), today.getDate());
+
+    // A consistent six-week grid, including surrounding-month dates.
+    for (let i = 0; i < 42; i++) {
+        const day = i - firstDay + 1;
+        const actualDate = new Date(year, month, day);
+        const inMonth = day >= 1 && day <= daysInMonth;
+        const key = dateKey(actualDate.getFullYear(), actualDate.getMonth(), actualDate.getDate());
+        const hasEvent = inMonth && events.some(event => event.date === key);
+        const element = document.createElement(hasEvent ? 'button' : 'div');
+        element.className = 'calendar-day';
+        element.textContent = actualDate.getDate();
+        if (!inMonth) element.classList.add('other-month');
+        if (inMonth && key === todayKey) {
+            element.classList.add('today');
+            element.setAttribute('aria-current', 'date');
+        }
+        if (hasEvent) {
+            element.type = 'button';
+            element.classList.add('has-event');
+            element.setAttribute('aria-label', `Show events for ${formatDate(key)}`);
+            element.setAttribute('aria-pressed', 'false');
+            element.addEventListener('click', () => {
+                grid.querySelectorAll('[aria-pressed]').forEach(button => button.setAttribute('aria-pressed', 'false'));
+                element.setAttribute('aria-pressed', 'true');
+                renderEventsList(key);
+            });
+        }
+        grid.appendChild(element);
+    }
+    calendarMonth.appendChild(grid);
+    renderEventsList();
 }
 
-function renderEventsList(year, month) {
-    const eventsList = document.getElementById('eventsList');
-    
-    // Get events for this month
-    const monthEvents = events.filter(event => {
-        const [eYear, eMonth] = event.date.split('-').map(Number);
-        return eYear === year && eMonth === month + 1;
-    }).sort((a, b) => new Date(a.date) - new Date(b.date));
-    
-    eventsList.innerHTML = '';
-    
-    if (monthEvents.length === 0) {
-        const noEvents = document.createElement('div');
-        noEvents.className = 'no-events';
-        noEvents.textContent = 'No events scheduled for this month. Check back soon!';
-        eventsList.appendChild(noEvents);
-    } else {
-        monthEvents.forEach(event => {
-            const eventEl = createEventElement(event);
-            eventsList.appendChild(eventEl);
-        });
+function renderEventsList(selectedDate = null) {
+    const list = document.getElementById('eventsList');
+    if (!list) return;
+    const monthPrefix = dateKey(currentDate.getFullYear(), currentDate.getMonth(), 1).slice(0, 7);
+    const matching = events.filter(event => selectedDate ? event.date === selectedDate : event.date.startsWith(monthPrefix + '-'))
+        .sort((a, b) => a.date.localeCompare(b.date));
+    list.replaceChildren();
+
+    if (!matching.length) {
+        const message = document.createElement('div');
+        message.className = 'no-events';
+        message.textContent = selectedDate ? 'No events on this date.' : 'No events scheduled for this month. Check back soon!';
+        list.appendChild(message);
+        const link = document.createElement('a');
+        link.href = 'https://mailman23.u.washington.edu/mailman/listinfo/thelodge';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = 'Join our listserv for event announcements.';
+        message.append(document.createElement('br'), link);
+        return;
     }
+    matching.forEach(event => list.appendChild(createEventElement(event)));
 }
 
 function createEventElement(event) {
-    const el = document.createElement('div');
-    el.className = 'event-item';
-    
-    const date = new Date(event.date);
-    const dateStr = date.toLocaleDateString('en-US', { 
-        weekday: 'short', 
-        month: 'short', 
-        day: 'numeric',
-        year: 'numeric'
+    const item = document.createElement('article');
+    item.className = 'event-item';
+    const fields = [
+        ['event-date', formatDate(event.date)],
+        ['event-title', event.title],
+        ['event-description', event.description],
+        ['event-location', event.location ? `📍 ${event.location}` : '']
+    ];
+    // Use textContent so event text is displayed safely as plain text.
+    fields.forEach(([className, value]) => {
+        if (!value) return;
+        const element = document.createElement('div');
+        element.className = className;
+        element.textContent = value;
+        item.appendChild(element);
     });
-    
-    el.innerHTML = `
-        <div class="event-date">${dateStr}</div>
-        <div class="event-title">${event.title}</div>
-        <div class="event-description">${event.description}</div>
-        <div class="event-location">📍 ${event.location}</div>
-    `;
-    
-    return el;
-}
-
-function filterEventsByDate(dateStr) {
-    const eventsList = document.getElementById('eventsList');
-    const dateEvents = events.filter(e => e.date === dateStr);
-    
-    eventsList.innerHTML = '';
-    
-    if (dateEvents.length === 0) {
-        const noEvents = document.createElement('div');
-        noEvents.className = 'no-events';
-        noEvents.textContent = 'No events on this date.';
-        eventsList.appendChild(noEvents);
-    } else {
-        dateEvents.forEach(event => {
-            const eventEl = createEventElement(event);
-            eventsList.appendChild(eventEl);
-        });
-    }
-}
-
-// Initialize calendar on page load
-document.addEventListener('DOMContentLoaded', () => {
-    renderCalendar();
-});
-
-// Add event - this function allows adding new events (for admin use)
-function addEvent(dateStr, title, description, location) {
-    events.push({
-        date: dateStr,
-        title: title,
-        description: description,
-        location: location
-    });
-    events.sort((a, b) => new Date(a.date) - new Date(b.date));
-    renderCalendar();
+    return item;
 }

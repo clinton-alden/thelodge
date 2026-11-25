@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Lodge brings UW students together across environmental science, law, and policy through field trips, campus events, and community.">
     <title>The Lodge - UW Environmental Collaboration</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -10,120 +11,82 @@
     <!-- Loading Screen with Animated Cabin Icon -->
     <div id="loadingScreen" class="loading-screen">
         <div class="loading-container">
-            <svg class="cabin-loader" viewBox="0 0 100 100" width="120" height="120">
-                <!-- Roof left slope -->
+            <svg class="cabin-loader" viewBox="0 0 100 100" width="120" height="120" aria-hidden="true">
                 <line x1="50" y1="20" x2="20" y2="50" class="cabin-line roof-left"/>
-                <!-- Roof right slope -->
                 <line x1="50" y1="20" x2="80" y2="50" class="cabin-line roof-right"/>
-                <!-- Wall left -->
                 <line x1="20" y1="50" x2="20" y2="85" class="cabin-line wall-left"/>
-                <!-- Wall right -->
                 <line x1="80" y1="50" x2="80" y2="85" class="cabin-line wall-right"/>
-                <!-- Foundation -->
                 <line x1="20" y1="85" x2="80" y2="85" class="cabin-line foundation"/>
-                <!-- Door -->
                 <rect x="42" y="65" width="16" height="20" class="cabin-door"/>
-                <!-- Window left -->
                 <rect x="30" y="57" width="8" height="8" class="cabin-window"/>
-                <!-- Window right -->
                 <rect x="62" y="57" width="8" height="8" class="cabin-window"/>
             </svg>
             <p class="loading-text">The Lodge</p>
         </div>
     </div>
-
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Main navigation">
         <div class="container navbar-content">
-            <div class="logo">
-                <img src="assets/logo_no_background.png" alt="The Lodge logo" class="lodge-icon">
-                <h1>The Lodge</h1>
-            </div>
+            <a class="logo" href="index.html" aria-label="The Lodge home">
+                <img src="assets/logo_no_background.png" alt="" class="lodge-icon">
+                <span>The Lodge</span>
+            </a>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html" class="active" aria-current="page">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="#events">Events</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
-
     <header class="hero">
         <div class="hero-background"></div>
         <div class="container hero-content">
             <h1>The Lodge</h1>
-            <p class="tagline">add info here</p>
-            <p class="subtitle">add info here</p>
-            <a href="#events" class="cta-button">Upcoming Field Trips</a>
+            <p class="tagline">Bridging disciplines. Exploring landscapes. Building community.</p>
+            <p class="subtitle">A University of Washington student organization bringing together people passionate about the environment through science, law, policy, and shared experiences in the outdoors.</p>
+            <div class="action-links">
+                <a href="#events" class="cta-button">Explore Our Events</a>
+                <a href="https://mailman23.u.washington.edu/mailman/listinfo/thelodge" class="secondary-button" target="_blank" rel="noopener noreferrer">Join Our Listserv</a>
+            </div>
         </div>
     </header>
-
     <main>
-        <section id="mission" class="section">
-            <div class="container">
-                <div class="mission-grid">
-                    <div class="mission-card">
-                        <div class="icon">🌲</div>
-                        <h3>add info here</h3>
-                        <p>add info here</p>
-                    </div>
-                    <div class="mission-card">
-                        <div class="icon">🤝</div>
-                        <h3>add info here</h3>
-                        <p>add info here</p>
-                    </div>
-                    <div class="mission-card">
-                        <div class="icon">🏞️</div>
-                        <h3>add info here</h3>
-                        <p>add info here</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="events" class="section alt">
             <div class="container">
-                <h2>Upcoming Field Trips</h2>
+                <h2>Upcoming Events</h2>
+                <p class="section-intro">From forests and rivers to coastlines and communities, our events explore environmental issues across the Pacific Northwest through field trips, conversations with practitioners, on-campus programming, and opportunities to connect with students from across UW.</p>
                 <div class="calendar-controls">
-                    <button class="calendar-btn" id="prevMonth">← Prev</button>
-                    <h3 id="currentMonth"></h3>
-                    <button class="calendar-btn" id="nextMonth">Next →</button>
+                    <button type="button" class="calendar-btn" id="prevMonth" aria-label="Previous month">← Prev</button>
+                    <h3 id="currentMonth" aria-live="polite"></h3>
+                    <button type="button" class="calendar-btn" id="nextMonth" aria-label="Next month">Next →</button>
                 </div>
-                
                 <div class="events-container">
-                    <div class="calendar-month" id="calendarMonth"></div>
-                    <div class="events-list" id="eventsList"></div>
+                    <div class="calendar-month" id="calendarMonth" aria-label="Event calendar"></div>
+                    <div class="events-list" id="eventsList" aria-live="polite"></div>
                 </div>
+                <p class="calendar-note">Select a highlighted date to see its events. <button type="button" class="text-button" id="showAllEvents">Show all events this month</button></p>
+                <noscript><p class="section-intro">Enable JavaScript to view the calendar, or join our mailing list for event announcements.</p></noscript>
             </div>
         </section>
-
         <section id="contact" class="section">
             <div class="container">
                 <h2>Get Involved</h2>
-                <div class="contact-grid">
-                    <div class="contact-card">
-                        <h3>add info here</h3>
-                        <p>add info here</p>
-                        <p class="contact-email">Email: <a href="mailto:thelodge@uw.edu">add info here</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <h3>add info here</h3>
-                        <p>add info here</p>
-                        <div class="social-links">
-                            <a href="#" class="social-btn">add info here</a>
-                            <a href="#" class="social-btn">add info here</a>
-                        </div>
-                    </div>
+                <div class="centered-content">
+                    <p>Curious about the environment, eager to get outside, or looking to meet people from across campus? We'd love to have you join us! The Lodge is open to all UW students, regardless of degree program or experience.</p>
+                <div class="action-links">
+                    <a class="cta-button" href="https://mailman23.u.washington.edu/mailman/listinfo/thelodge" target="_blank" rel="noopener noreferrer">Join Our Listserv</a>
+                    <a class="secondary-button" href="mailto:thelodge@uw.edu">Email Us</a>
+                </div>
+                    <p>Have questions, ideas for events, or an interest in joining our leadership team?<br><a href="mailto:thelodge@uw.edu">thelodge@uw.edu</a></p>
                 </div>
             </div>
         </section>
     </main>
-
     <footer>
         <div class="container">
-            <p>&copy; 2026 The Lodge. A collaboration of UW Law and Environmental Graduate Students.</p>
+            <p>&copy; 2026 The Lodge · A student-led community for environmental collaboration at the University of Washington.</p>
         </div>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
