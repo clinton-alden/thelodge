@@ -71,6 +71,7 @@
                         {% assign folder_prefix = '/assets/events/' | append: event.id | append: '/' %}
                         {% assign prefix_length = folder_prefix | size %}
                         {% assign cover = nil %}
+                        {% assign poster = nil %}
                         {% assign photo_count = 0 %}
                         {% for file in all_files %}
                             {% assign prefix = file.path | slice: 0, prefix_length %}
@@ -78,13 +79,18 @@
                             {% if prefix == folder_prefix and photo_extensions contains extension %}
                                 {% assign photo_count = photo_count | plus: 1 %}
                                 {% unless cover %}{% assign cover = file %}{% endunless %}
+                                {% assign basename = file.path | split: '/' | last | downcase | split: '.' | first %}
+                                {% if basename == '00-poster' or basename == 'poster' %}
+                                    {% unless poster %}{% assign poster = file %}{% endunless %}
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
+                        {% if poster %}{% assign cover = poster %}{% endif %}
                         <article class="archive-card" id="{{ event.id | escape }}">
                             <div class="archive-summary{% unless cover %} no-cover{% endunless %}">
                                 {% if cover %}
-                                <div class="archive-cover">
-                                    <img src="{{ cover.path | relative_url | escape }}" alt="Photo from {{ event.title | escape }}" loading="lazy" decoding="async">
+                                <div class="archive-cover{% if poster %} archive-poster{% endif %}">
+                                    <img src="{{ cover.path | relative_url | escape }}" alt="{% if poster %}Original event poster for{% else %}Photo from{% endif %} {{ event.title | escape }}" loading="lazy" decoding="async">
                                 </div>
                                 {% else %}
                                 <div class="archive-cover archive-placeholder">The Lodge</div>
@@ -97,14 +103,19 @@
                                 </div>
                             </div>
                             <details class="archive-album">
-                                <summary>Event recap{% if photo_count > 0 %} &amp; photos ({{ photo_count }}){% endif %}</summary>
+                                <summary>Event recap{% if photo_count > 0 %} &amp; images ({{ photo_count }}){% endif %}</summary>
                                 <p class="archive-description">{{ event.description | escape | newline_to_br }}</p>
                                 {% if photo_count > 0 %}
                                 <div class="album-grid">
+                                    {% if poster %}
+                                    <a class="album-poster" href="{{ poster.path | relative_url | escape }}" target="_blank" rel="noopener">
+                                        <img src="{{ poster.path | relative_url | escape }}" alt="Original event poster for {{ event.title | escape }}" loading="lazy" decoding="async">
+                                    </a>
+                                    {% endif %}
                                     {% for file in all_files %}
                                         {% assign prefix = file.path | slice: 0, prefix_length %}
                                         {% assign extension = file.extname | remove: '.' | downcase %}
-                                        {% if prefix == folder_prefix and photo_extensions contains extension %}
+                                        {% if prefix == folder_prefix and photo_extensions contains extension and file.path != poster.path %}
                                         <a href="{{ file.path | relative_url | escape }}" target="_blank" rel="noopener">
                                             <img src="{{ file.path | relative_url | escape }}" alt="Photo from {{ event.title | escape }}" loading="lazy" decoding="async">
                                         </a>

@@ -33,3 +33,9 @@
 .archive-empty { color: #555; text-align: center; padding: 2rem 0; flex: 1 0 100%; }
 .archive-strip:focus-visible, .archive-album summary:focus-visible, .album-grid a:focus-visible { outline: 2px solid var(--primary-green); outline-offset: 3px; }
 #event-archive { scroll-margin-top: 150px; }
+
+/* Show the entire original poster without cropping its text. */
+.archive-cover { aspect-ratio: 4 / 5; background: var(--bg-earth); }
+.archive-cover.archive-poster img { object-fit: contain; }
+.album-grid .album-poster { grid-column: 1 / -1; background: var(--bg-earth); }
+.album-grid .album-poster img { aspect-ratio: auto; max-height: 440px; object-fit: contain; }
